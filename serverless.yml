@@ -1,0 +1,40 @@
+org: gustavodev01
+app: openapi-poc
+service: openapi-poc
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+plugins:
+  - serverless-offline
+  - serverless-openapi-documentation-v2
+  - serverless-s3-sync
+
+custom:
+  documentation: ${file(serverless.doc.yml):documentation}
+  openApiBucket: galv1-my-test-bucket-2
+  s3Sync:
+    - bucketName: ${self:custom.openApiBucket}
+      localDir: documentation/openApi.yml
+      acl: public-read
+
+functions:
+  getItems:
+    handler: functions/getItems.handler
+    events:
+      - http:
+          path: items
+          method: get
+          documentation: ${file(serverless.doc.yml):documentation.endpoints.getItems}
+
+resources:
+  Resources:
+    OpenApiBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.openApiBucket}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html

@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "serverless-offline": "^8.5.0",
+    "serverless-openapi-documentation-v2": "^0.4.6",
+    "serverless-s3-sync": "^3.0.0"
+  },
+  "scripts": {
+    "openApi": "serverless openapi generate -o documentation/openApi.yml"
+  }
+}

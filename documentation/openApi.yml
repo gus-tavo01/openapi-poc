@@ -1,0 +1,39 @@
+openapi: 3.0.0
+components:
+  schemas:
+    GetItemsResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+        message:
+          type: string
+        payload:
+          type: object
+  securitySchemes: {}
+info:
+  title: 'default title, will change soon'
+  description: same for this field
+  version: '1'
+servers: []
+paths:
+  /items:
+    get:
+      operationId: getItems
+      summary: Get items
+      description: a detailed description of the method
+      parameters:
+        - name: name
+          in: query
+          description: filter item name
+          required: false
+          allowEmptyValue: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetItemsResponse'

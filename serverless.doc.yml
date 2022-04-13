@@ -1,0 +1,30 @@
+documentation:
+  version: "1"
+  title: "default title, will change soon"
+  description: "same for this field"
+  endpoints:
+    getItems:
+      summary: "Get items"
+      description: "a detailed description of the method"
+      queryParams:
+        - name: "name"
+          description: "filter item name"
+          schema:
+            type: "string"
+      methodResponses:
+        - statusCode: "200"
+          responseModels:
+            "application/json": "GetItemsResponse"
+  models:
+    - name: "GetItemsResponse"
+      description: "Get items response"
+      contentType: "application/json"
+      schema:
+        type: "object"
+        properties:
+          statusCode:
+            type: "number"
+          message:
+            type: "string"
+          payload:
+            type: "object"
